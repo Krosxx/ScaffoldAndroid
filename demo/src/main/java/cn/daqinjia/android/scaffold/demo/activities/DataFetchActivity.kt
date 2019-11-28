@@ -2,11 +2,10 @@ package cn.daqinjia.android.scaffold.demo.activities
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityMultiStepBinding
-import cn.daqinjia.android.scaffold.net.Api
+import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

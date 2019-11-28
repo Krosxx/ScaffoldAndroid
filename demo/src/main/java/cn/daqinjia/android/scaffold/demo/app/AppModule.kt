@@ -2,7 +2,6 @@ package cn.daqinjia.android.scaffold.demo.app
 
 import cn.daqinjia.android.scaffold.demo.activities.MStepViewModel
 import cn.daqinjia.android.scaffold.demo.activities.MainViewModel
-import cn.daqinjia.android.scaffold.net.Api
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

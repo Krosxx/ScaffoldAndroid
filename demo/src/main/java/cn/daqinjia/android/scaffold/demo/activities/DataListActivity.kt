@@ -6,7 +6,7 @@ import cn.daqinjia.android.scaffold.demo.BR
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityDataListBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.net.Api
+import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.ui.base.BaseBindAdapter
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel

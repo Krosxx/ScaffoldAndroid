@@ -31,8 +31,8 @@ open class ScaffoldViewModel : ViewModel() {
     }
 
     /**
-     * 网络请求 -> LiveData
-     * 通过更新LiveData
+     * 网络请求 -> LiveData(ld)
+     * 更新LiveData
      */
     fun <T> apiCall(
         callAction: suspend () -> BaseResponseData<T>,
@@ -49,6 +49,8 @@ open class ScaffoldViewModel : ViewModel() {
 
     /**
      *
+     * 网络请求 -> LiveData(uiData)
+     * 更新 uiData
      */
     fun <T> apiCall(
         callAction: suspend () -> BaseResponseData<T>,

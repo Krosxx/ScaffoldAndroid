@@ -1,6 +1,7 @@
-package cn.daqinjia.android.scaffold.net
+package cn.daqinjia.android.scaffold.demo.app
 
-import androidx.lifecycle.LiveData
+import cn.daqinjia.android.scaffold.net.BaseResponseData
+import cn.daqinjia.android.scaffold.net.RestApi
 import retrofit2.http.GET
 import retrofit2.http.Query
 

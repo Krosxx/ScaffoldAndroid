@@ -10,12 +10,17 @@ import androidx.databinding.ViewDataBinding
 
 abstract class ScaffoldActivity<VDB : ViewDataBinding> : ScaffoldPage<VDB>, AppCompatActivity(),TextSizeableDelegate {
     override lateinit var _binding: ViewDataBinding
+    override var loadTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _onCreate()
         setContentView(buildView(null, layoutInflater))
         onPageCreate()
+    }
+
+    override fun superAttachBaseContext(base: Context) {
+        super.attachBaseContext(base)
     }
 
     override fun attachBaseContext(newBase: Context) {

@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.net.Api
+import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.net.BaseResponseData
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
