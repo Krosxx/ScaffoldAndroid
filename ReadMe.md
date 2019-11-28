@@ -10,6 +10,7 @@
 
 
 -  [Lifecycles](https://developer.android.google.cn/topic/libraries/architecture/lifecycle)
+
    管理 Activity 和 Fragment 生命周期
 
 -  [ViewModel](https://developer.android.google.cn/topic/libraries/architecture/viewmodel)
@@ -18,9 +19,11 @@
    数据库数据：Room -> LiveData
    
 -  [DataBinding](https://developer.android.google.cn/topic/libraries/architecture/lifecycle)
+
    数据绑定视图
    
 -  [Room](https://developer.android.google.cn/topic/libraries/architecture/room)
+
    持久化储存：SQLite数据库
 
 -  [SmartKey](https://github.com/Vove7/SmartKey)
@@ -31,17 +34,13 @@
 
 ### 其他
 
--  Retrofit
-   网络
+-  Retrofit  网络
 
--  Glide
-   图片加载
--  
-日志
+-  Glide  图片加载
 
--  [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
+-  日志 TODO
 
-   运行时权限
+-  [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)  运行时权限
 
 
 
