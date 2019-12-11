@@ -15,10 +15,18 @@ interface ScaffoldPage<VDB : ViewDataBinding> {
     val layoutRes: Int
 
     fun buildView(container: ViewGroup? = null, layoutInflater: LayoutInflater): View {
-        return DataBindingUtil.inflate<VDB>(layoutInflater, layoutRes, container, false)?.let {
-            _binding = it
-            it.root
-        } ?: layoutInflater.inflate(layoutRes, container, false)
+        val inflateView by lazy {
+            layoutInflater.inflate(layoutRes, container, false)
+        }
+        return try {
+            DataBindingUtil.inflate<VDB>(layoutInflater, layoutRes, container, false)?.let {
+                _binding = it
+                it.root
+            } ?: inflateView
+        } catch (e: Throwable) {
+            inflateView
+        }
+
     }
 
     fun onObserveLiveData() {}

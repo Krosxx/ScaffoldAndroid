@@ -32,6 +32,8 @@
         <activity
             android:name=".activities.NoBindingTestActivity"
             android:exported="true" />
+        <activity android:name=".activities.ImagesActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

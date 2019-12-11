@@ -4,9 +4,9 @@ import android.widget.Toast
 import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.BR
 import cn.daqinjia.android.scaffold.demo.R
+import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityDataListBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.ui.base.BaseBindAdapter
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
@@ -30,19 +30,11 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
         PagingListAdapter().apply {
             setLoadMoreView(SimpleLoadMoreView())
             setOnLoadMoreListener({ loadMore() }, listView)
-            setOnItemChildClickListener { ada, view, position ->
 
+            //TODO 监听 Button
+            setOnItemClickListener { ada, view, position ->
                 val i = ada.getItem(position)
-                when (view.id) {
-                    R.id.button -> {
-                        Toast.makeText(this@DataListActivity, "button $i", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    else -> {
-                        Toast.makeText(this@DataListActivity, "$i", Toast.LENGTH_SHORT).show()
-
-                    }
-                }
+                Toast.makeText(this@DataListActivity, "$i", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -102,7 +94,13 @@ class PagingViewMModel : ScaffoldViewModel() {
             page++
             emitUiState("data" to it.data)
         } else {
-            emitUiState("failed" to true)
+            if (page < 3) {//假数据
+                page++
+                emitUiState("data" to arrayOf(-1, -1, -1, -1, 0))
+            } else {
+                emitUiState("failed" to true)
+            }
+
         }
     }
 
@@ -116,6 +114,4 @@ class PagingViewMModel : ScaffoldViewModel() {
 /**
  *  自动绑定 -> <layout.data>
  */
-class PagingListAdapter : BaseBindAdapter<Int>(R.layout.paging_item, BR.number) {
-
-}
+class PagingListAdapter : BaseBindAdapter<Int>(R.layout.paging_item, BR.number)

@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 
 
-abstract class ScaffoldActivity<VDB : ViewDataBinding> : ScaffoldPage<VDB>, AppCompatActivity(),TextSizeableDelegate {
+abstract class ScaffoldActivity<VDB : ViewDataBinding> : ScaffoldPage<VDB>, AppCompatActivity(),
+    TextSizeableDelegate {
     override lateinit var _binding: ViewDataBinding
     override var loadTime: Long = 0
 
@@ -40,10 +41,14 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding> : ScaffoldPage<VDB>, AppC
         startActivity(intent)
     }
 
+    final override fun onPageCreate() {
+        super.onPageCreate()
+    }
+
     override fun onResume() {
         super.onResume()
         _onResume()
     }
 }
 
-abstract class NoBindingActivity: ScaffoldActivity<ViewDataBinding>()
+abstract class NoBindingActivity : ScaffoldActivity<ViewDataBinding>()
