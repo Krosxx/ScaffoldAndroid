@@ -10,13 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:orientation="vertical"
         tools:context=".activities.DataFetchActivity">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="fetch"
+            android:gravity="center"
             android:text="Fetch data" />
+
+        <TextView
+            android:id="@+id/data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

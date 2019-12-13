@@ -1,13 +1,13 @@
 package cn.daqinjia.android.scaffold.demo.activities
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
-import cn.daqinjia.android.scaffold.demo.databinding.ActivityMultiStepBinding
 import cn.daqinjia.android.scaffold.demo.app.Api
+import cn.daqinjia.android.scaffold.demo.databinding.ActivityDataFetchBinding
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
+import kotlinx.android.synthetic.main.activity_data_fetch.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -16,25 +16,26 @@ import org.koin.android.viewmodel.ext.android.viewModel
  *
  * @author Vove
  */
-class DataFetchActivity : ScaffoldActivity<ActivityMultiStepBinding>() {
+class DataFetchActivity : ScaffoldActivity<ActivityDataFetchBinding>() {
     override val layoutRes: Int
-        get() = R.layout.activity_multi_step
+        get() = R.layout.activity_data_fetch
 
     private val vm: MStepViewModel by viewModel()
 
     override fun onObserveLiveData() {
         vm.uiData.observe(this) {
-            Log.d("DATA", it["list"].toString())
+            data_view.text = it["fetch_data"].toString()
         }
     }
 
     fun fetch(v: View) {
+        data_view.text = "fetching..."
         vm.onFetch()
     }
 }
 
 class MStepViewModel : ScaffoldViewModel() {
 
-    fun onFetch() = apiCall({ Api.list(0) }, "list")
+    fun onFetch() = apiCall({ Api.list(0) }, "fetch_data")
 
 }
