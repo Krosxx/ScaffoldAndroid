@@ -8,12 +8,12 @@ import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.app.AppDatabase
 import cn.daqinjia.android.scaffold.demo.data.get
-import cn.daqinjia.android.scaffold.demo.databinding.ActivityMainBinding
+import cn.daqinjia.android.scaffold.demo.databinding.ActivityMvvmDemoBinding
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : ScaffoldActivity<ActivityMainBinding>() {
-    override val layoutRes: Int get() = R.layout.activity_main
+class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
+    override val layoutRes: Int get() = R.layout.activity_mvvm_demo
 
     //koin fun viewModel() 注入repo
     private val vm: MainViewModel by viewModel()
