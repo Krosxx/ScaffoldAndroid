@@ -36,6 +36,7 @@ class DataFetchActivity : ScaffoldActivity<ActivityDataFetchBinding>() {
 
 class MStepViewModel : ScaffoldViewModel() {
 
+    //通过 reqName 作为请求标识 => uiData(LiveData) => UI
     fun onFetch() = apiCall({ Api.list(0) }, "fetch_data")
 
 }

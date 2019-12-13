@@ -40,6 +40,7 @@ class NetTestViewModel : ScaffoldViewModel() {
     val resData = MutableLiveData<BaseResponseData<String>>()
 
     init {
+        //通过 指定 LiveData 发起请求
         apiCall(Api::get200, resData)
     }
 }
