@@ -8,6 +8,7 @@ import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.app.AppDatabase
 import cn.daqinjia.android.scaffold.demo.data.get
+import cn.daqinjia.android.scaffold.demo.data.set
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityMvvmDemoBinding
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -19,8 +20,13 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
     private val vm: MainViewModel by viewModel()
 
     override fun onObserveLiveData() {
-        vm.number.observe(this){
+        vm.number.observe(this) {
             binding.number = it
+            AppDatabase.configdDao["username"] = "Vove-$it"
+
+        }
+        vm.username.observe(this) {
+            binding.username = "local name: " + it.value
         }
     }
 

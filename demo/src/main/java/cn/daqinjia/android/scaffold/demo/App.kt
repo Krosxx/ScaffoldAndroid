@@ -20,8 +20,6 @@ class App : ScaffoldApp() {
     override fun onCreate() {
         super.onCreate()
 
-        AppDatabase.configdDao["username"] = "111"
-
         GlobalScope.launch {
             for (i in 0..9)
                 AppDatabase.configdDao.insert(Config("key_$i", "value_%i"))
