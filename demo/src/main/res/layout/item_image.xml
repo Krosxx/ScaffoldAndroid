@@ -18,7 +18,9 @@
             android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:background="?attr/selectableItemBackground"
             android:scaleType="centerCrop"
+            app:glimpse="@{true}"
             app:imageUrl="@{imgUrl}"
             tools:src="@drawable/ic_launcher_background" />
     </LinearLayout>

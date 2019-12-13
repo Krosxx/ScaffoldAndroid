@@ -6,6 +6,10 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion build_version.compileSdkVersion
 
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
+    }
     defaultConfig {
         applicationId "cn.daqinjia.android.scaffold.demo"
         minSdkVersion build_version.minSdkVersion
@@ -68,4 +72,9 @@ dependencies {
     // Koin Android Experimental features
     api "org.koin:koin-android-ext:$koin_version"
 
+
+    implementation 'com.github.vove7.glimpse-android:glimpse-core:0.0.4.1'
+    //only required for glide extensions
+    implementation 'com.github.vove7.glimpse-android:glimpse-glide:0.0.4.1'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 }

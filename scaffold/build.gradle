@@ -55,7 +55,6 @@ dependencies {
     api libs.jetpack_livedata_ktx
 
     // Net
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.google.code.gson:gson:2.8.5'
     api 'com.squareup.retrofit2:retrofit:2.6.0'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'

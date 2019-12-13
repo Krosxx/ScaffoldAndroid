@@ -5,6 +5,7 @@ import cn.daqinjia.android.scaffold.demo.app.AppDatabase
 import cn.daqinjia.android.scaffold.demo.app.appModules
 import cn.daqinjia.android.scaffold.demo.data.Config
 import cn.daqinjia.android.scaffold.demo.data.set
+import glimpse.core.Glimpse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
@@ -25,11 +26,12 @@ class App : ScaffoldApp() {
                 AppDatabase.configdDao.insert(Config("key_$i", "value_%i"))
         }
 
-
         startKoin {
             androidContext(this@App)
             modules(appModules)
         }
+
+        Glimpse.init(this)
     }
 
 }
