@@ -89,6 +89,7 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
 class PagingViewMModel : ScaffoldViewModel() {
     var page = 0
 
+    //ViewMModel 处理结果 通知 UI 更新
     fun loadMore() = apiCall({ Api.list(page) }) {
         if (it.isSuccess && it.data != null) {
             page++
