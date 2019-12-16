@@ -37,24 +37,38 @@ object RestApi {
 
     inline fun <reified T : Any> createKot(): T = createKot(T::class)
 
-    // create api service baseUrl singleton
-    // config value in companion
+    /**
+     * Create api service baseUrl singleton
+     *
+     * Config value in companion impl [RetrofitApiConstants]
+     *
+     * 参数优先级高于 Api 内部定义参数
+     */
     fun <T : Any> createKot(
         clz: KClass<T>,
-        connectionTimeout: Int = 5000,
-        readTimeout: Int = 5000,
-        writeTimeout: Int = 5000
+        connectionTimeout: Int? = null,
+        readTimeout: Int? = null,
+        writeTimeout: Int? = null
     ): T {
 
         val companionRef = clz.companionObjectInstance
             ?: throw IllegalArgumentException("${clz.simpleName} does not have a companion field")
 
-        return createApiClient(
-            companionRef["BASE_URL"],
-            companionRef["CONNECTIONTIMEOUT", connectionTimeout],
-            companionRef["READTIMEOUT", readTimeout],
-            companionRef["WRITETIMEOUT", writeTimeout]
-        ).create(clz.java)
+        return if (companionRef is RetrofitApiConstants) {
+            createApiClient(
+                companionRef.baseUrl,
+                connectionTimeout ?: companionRef.connectionTimeoutMillis,
+                readTimeout ?: companionRef.readTimeoutMillis,
+                writeTimeout ?: companionRef.writeTimeoutMillis
+            ).create(clz.java)
+        } else {
+            createApiClient(
+                companionRef["BASE_URL"],
+                connectionTimeout ?: companionRef["CONNECTIONTIMEOUT", 5000],
+                readTimeout ?: companionRef["READTIMEOUT", 5000],
+                writeTimeout ?: companionRef["WRITETIMEOUT", 5000]
+            ).create(clz.java)
+        }
     }
 
     // create okHttpClient singleton
@@ -74,4 +88,11 @@ object RestApi {
         }.build()
 
 
+}
+
+interface RetrofitApiConstants {
+    val baseUrl: String
+    val connectionTimeoutMillis: Int
+    val readTimeoutMillis: Int
+    val writeTimeoutMillis: Int
 }

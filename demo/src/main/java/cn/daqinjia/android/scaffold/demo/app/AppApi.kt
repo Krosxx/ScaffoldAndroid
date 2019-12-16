@@ -2,6 +2,7 @@ package cn.daqinjia.android.scaffold.demo.app
 
 import cn.daqinjia.android.scaffold.net.BaseResponseData
 import cn.daqinjia.android.scaffold.net.RestApi
+import cn.daqinjia.android.scaffold.net.RetrofitApiConstants
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,10 +15,11 @@ import retrofit2.http.Query
 interface AppApi {
 
 
-    companion object {
-
-        @JvmStatic
-        val BASE_URL = "http://192.168.1.103"
+    companion object : RetrofitApiConstants {
+        override val baseUrl: String = "http://192.168.1.103"
+        override val connectionTimeoutMillis: Int = 3000
+        override val readTimeoutMillis: Int = 3000
+        override val writeTimeoutMillis: Int = 3000
     }
 
     @GET("/200")
