@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 
@@ -13,11 +14,26 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding> : ScaffoldPage<VDB>, AppC
     override lateinit var _binding: ViewDataBinding
     override var loadTime: Long = 0
 
+    open val showReturnIcon = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _onCreate()
         setContentView(buildView(null, layoutInflater))
+        if (showReturnIcon) {
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+            }
+        }
         onPageCreate()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun superAttachBaseContext(base: Context) {
