@@ -1,12 +1,13 @@
 package cn.daqinjia.android.scaffold.demo.activities
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
+import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.net.BaseResponseData
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
@@ -16,6 +17,14 @@ import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
  * Created on 2019/11/25
  *
  * 网络请求测试
+ *
+ *
+ * 初始加载数据多种情形：
+ *
+ * 1. 进入加载失败，显示重试按钮
+ *
+ *
+ *
  * @author Vove
  */
 class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
@@ -25,22 +34,41 @@ class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
     private val vm by viewModelOf<NetTestViewModel>()
 
     override fun onObserveLiveData() {
-        vm.resData.observe(this, Observer {
+        vm.uiData.observe(this) {
+            if ("loading" in it) {
+                binding.error = false
+            }
+        }
+
+        vm.resData.observe(this) {
             Log.d("NetTest", it.toString())
             if (it.isSuccess) {
                 binding.data = it.data
             } else {
                 binding.error = true
             }
-        })
+        }
+    }
+
+    fun reload(v: View) {
+        vm.load()
     }
 }
 
 class NetTestViewModel : ScaffoldViewModel() {
     val resData = MutableLiveData<BaseResponseData<String>>()
 
+    /**
+     * 在第一次页面加载时触发
+     * 可以对数据进行缓存（重建时无需再请求数据）
+     */
     init {
         //通过 指定 LiveData 发起请求
+        load()
+    }
+
+    fun load() {
+        emitUiState("loading")
         apiCall(Api::get200, resData)
     }
 }
