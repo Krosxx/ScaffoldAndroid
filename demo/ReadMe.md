@@ -45,3 +45,21 @@ implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
 **但是 又使用了 retrofit:2.6 已经依赖 okhttp 4.2.2  优先不考虑加载https资源**
 
+### 配置打包文件路径
+
+```grvooy
+android {
+    //配置打包apk路径及文件名
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def type = "-" + buildType.name
+            if (type != "-release") {
+                type = ""
+            }
+            def filename = "../../apks//应用名-signed-v${versionName}${type}.apk"
+            outputFileName = filename
+        }
+    }
+}
+
+```

@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.daqinjia.android.scaffold.demo">
 
-    <uses-sdk
-        android:minSdkVersion="15"
-        tools:overrideLibrary="glimpse.core, glimpse.glide" />
+    <uses-sdk tools:overrideLibrary="glimpse.core, glimpse.glide" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 

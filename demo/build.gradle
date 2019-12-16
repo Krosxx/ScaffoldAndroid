@@ -25,6 +25,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix '.test'
+            versionNameSuffix "-test"
+        }
     }
 
     compileOptions {
@@ -37,6 +41,18 @@ android {
     dataBinding {
         enabled = true
     }
+    //配置打包apk路径及文件名
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def type = "-" + buildType.name
+            if (type != "-release") {
+                type = ""
+            }
+            def filename = "../../apks//demo-signed-v${versionName}${type}.apk"
+            outputFileName = filename
+        }
+    }
+
 }
 
 dependencies {
