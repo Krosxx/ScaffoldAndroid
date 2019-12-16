@@ -30,6 +30,10 @@ open class ScaffoldViewModel : ViewModel() {
         _uiData.value = mapOf(*data)
     }
 
+    fun emitUiState(status: String) {
+        _uiData.value = mapOf(status to null)
+    }
+
     /**
      * 网络请求 -> LiveData(ld)
      * 更新LiveData
