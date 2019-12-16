@@ -1,7 +1,7 @@
 package cn.daqinjia.android.scaffold.app
 
 import android.app.Application
-import cn.daqinjia.android.scaffold.ext.runOnNewHandlerThread
+import cn.daqinjia.android.scaffold.ext.delayRun
 
 /**
  * # ScaffoldApp
@@ -19,7 +19,7 @@ abstract class ScaffoldApp : Application() {
         super.onCreate()
         registerActivityLifecycleCallbacks(ActivityManager)
         immediatelyInit()
-        runOnNewHandlerThread(delay = 2000) { delayInit() }
+        delayRun(2000) { delayInit() }
     }
 
     open fun immediatelyInit() {}

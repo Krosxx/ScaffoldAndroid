@@ -1,8 +1,9 @@
 package cn.daqinjia.android.scaffold.ext
 
-import android.os.Build
-import android.os.Handler
-import android.os.HandlerThread
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * # Ext
@@ -11,20 +12,7 @@ import android.os.HandlerThread
  * @author Vove
  */
 
-@JvmOverloads
-fun runOnNewHandlerThread(
-    name: String = "anonymous", delay: Long = 0,
-    autoQuit: Boolean = true, block: () -> Unit): HandlerThread {
-
-    return HandlerThread(name).apply {
-        start()
-        Handler(looper).postDelayed({
-            block()
-            if (autoQuit && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-                quitSafely()
-            else {
-                quit()
-            }
-        }, delay)
-    }
+fun delayRun(millis: Long, block: () -> Unit): Job = GlobalScope.launch {
+    delay(millis)
+    block()
 }
