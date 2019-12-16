@@ -6,20 +6,44 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import cn.daqinjia.android.scaffold.ext.fadeIn
 import cn.daqinjia.android.scaffold.ext.fadeOut
+import cn.daqinjia.android.scaffold.ext.gone
+import cn.daqinjia.android.scaffold.ext.show
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 
-@BindingAdapter("isGone")
-fun bindIsGone(view: View, isGone: Boolean) {
-    if (isGone) {
-        view.fadeOut()
-    } else {
-        view.fadeIn()
+@BindingAdapter(
+    "isGone",
+    "goneAni",
+    requireAll = false
+)
+fun bindIsGone(
+    view: View,
+    isGone: Boolean,
+    goneAni: Boolean = false
+) {
+    when (isGone * 2 + goneAni) {
+        //f,f
+        0 -> view.show()
+        //f,t
+        1 -> view.fadeIn()
+        //t,f
+        2 -> view.gone()
+        //t,t
+        3 -> view.fadeOut()
     }
 }
+
+private fun Boolean.toInt(): Int = if (this) 1 else 0
+
+private operator fun Int.plus(b: Boolean): Int = b.toInt() + this
+
+private operator fun Boolean.plus(b: Int): Int = this.toInt() + b
+
+private operator fun Boolean.times(i: Int): Int = i * this.toInt()
+
 
 /**
  * ImageView 属性适配
