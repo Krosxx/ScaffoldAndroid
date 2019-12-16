@@ -40,10 +40,9 @@
 
 -  日志 TODO
 
--  [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)  运行时权限
 
+### Demo
 
+包含开发模式
 
-
-
-
+[>>> Demo](demo/ReadMe.md)

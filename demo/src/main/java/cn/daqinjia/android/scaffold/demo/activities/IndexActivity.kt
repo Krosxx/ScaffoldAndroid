@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import cn.daqinjia.android.scaffold.demo.R
+import com.github.ielse.imagewatcher.PhotoViewActivity
 
 /**
  * # IndexActivity
@@ -23,9 +24,14 @@ import cn.daqinjia.android.scaffold.demo.R
  * @author Vove
  */
 class IndexActivity : AppCompatActivity() {
+    private val excludeActivity = arrayOf(
+        PhotoViewActivity::class,
+        IndexActivity::class
+    ).map { it.java.name }
+
     val activities: List<ActivityInfo> by lazy {
         packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).let {
-            it.activities.filter { i -> i.name != IndexActivity::class.java.name }
+            it.activities.filter { i -> i.name !in excludeActivity }
         }
     }
 
@@ -42,7 +48,7 @@ class IndexActivity : AppCompatActivity() {
 
                 return ((convertView as TextView?) ?: TextView(context).apply {
                     layoutParams = AbsListView.LayoutParams(-1, -2).apply {
-                        setPadding(10, 10, 10, 10)
+                        setPadding(20, 30, 20, 30)
                     }
                     val tv = TypedValue()
                     theme.resolveAttribute(R.attr.selectableItemBackground, tv, true)

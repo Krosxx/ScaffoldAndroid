@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.daqinjia.android.scaffold.demo">
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        tools:overrideLibrary="glimpse.core, glimpse.glide" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,22 +25,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MVVMDemoActivity"
-            android:exported="true" />
+        <activity
+            android:name=".activities.MVVMDemoActivity"
+            android:exported="true"
+            android:label="MVVMDemoActivity" />
         <activity
             android:name=".activities.NetTestActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="NetTestActivity" />
         <activity
             android:name=".activities.DataFetchActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="DataFetchActivity" />
         <activity
             android:name=".activities.DataListActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="DataListActivity" />
         <activity
             android:name=".activities.NoBindingTestActivity"
-            android:exported="true" />
-        <activity android:name=".activities.ImagesActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="NoBindingTestActivity" />
+        <activity
+            android:name=".activities.ImagesActivity"
+            android:exported="true"
+            android:label="ImagesActivity" />
     </application>
 
 </manifest>
