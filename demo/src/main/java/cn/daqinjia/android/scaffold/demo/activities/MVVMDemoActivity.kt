@@ -17,13 +17,12 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
     override val layoutRes: Int get() = R.layout.activity_mvvm_demo
 
     //koin fun viewModel() 注入repo
-    private val vm: MainViewModel by viewModel()
+    private val vm: DemoViewModel by viewModel()
 
     override fun onObserveLiveData() {
         vm.number.observe(this) {
             binding.number = it
-            AppDatabase.configdDao["username"] = "Vove-$it"
-
+            vm.updateUserName("Vove-$it")
         }
         vm.username.observe(this) {
             binding.username = "local name: " + it.value
@@ -39,15 +38,19 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
     }
 }
 
-class MainViewModel : ViewModel() {
+class DemoViewModel : ViewModel() {
     init {
-        Log.d("MainViewModel", "init")
+        Log.d("DemoViewModel", "init")
     }
 
     val number = MutableLiveData(11)
 
     fun add() {
         number.value = (number.value ?: 0) + 1
+    }
+
+    fun updateUserName(n: String) {
+        AppDatabase.configdDao["username"] = n
     }
 
     val username = AppDatabase.configdDao["username"]
