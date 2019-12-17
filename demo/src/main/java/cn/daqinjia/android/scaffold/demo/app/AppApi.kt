@@ -1,6 +1,6 @@
 package cn.daqinjia.android.scaffold.demo.app
 
-import cn.daqinjia.android.scaffold.net.BaseResponseData
+import cn.daqinjia.android.scaffold.net.ResponseData
 import cn.daqinjia.android.scaffold.net.RestApi
 import cn.daqinjia.android.scaffold.net.RetrofitApiConstants
 import retrofit2.http.GET
@@ -23,10 +23,10 @@ interface AppApi {
     }
 
     @GET("/200")
-    suspend fun get200(): BaseResponseData<String>
+    suspend fun get200(): ResponseData<String>
 
     @GET("/list")
-    suspend fun list(@Query("page") page: Int): BaseResponseData<Array<Int>>
+    suspend fun list(@Query("page") page: Int): ResponseData<Array<Int>>
 
 }
 

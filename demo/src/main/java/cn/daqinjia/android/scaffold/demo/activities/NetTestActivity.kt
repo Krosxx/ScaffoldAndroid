@@ -8,7 +8,7 @@ import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.net.BaseResponseData
+import cn.daqinjia.android.scaffold.net.ResponseData
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
 
@@ -56,7 +56,7 @@ class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
 }
 
 class NetTestViewModel : ScaffoldViewModel() {
-    val resData = MutableLiveData<BaseResponseData<String>>()
+    val resData = MutableLiveData<ResponseData<String>>()
 
     /**
      * 在第一次页面加载时触发
