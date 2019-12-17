@@ -82,7 +82,7 @@ open class ScaffoldViewModel : ViewModel() {
                 val res = callAction()
                 onResult(res)
             } catch (e: Throwable) {
-                val baseReq = BaseResponseData<T>(-9, e.message, null, e)
+                val baseReq = BaseResponseData.exception<T>(e)
                 onResult(baseReq)
             }
         }
