@@ -1,5 +1,6 @@
 package cn.daqinjia.android.scaffold.ui.base
 
+import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
@@ -34,7 +35,9 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
             setSupportActionBar(this)
             if (showReturnIcon) {
                 setNavigationIcon(R.drawable.back_arrow)
-                setNavigationOnClickListener { onBackPressed() }
+                setNavigationOnClickListener {
+                    onBackPressed()
+                }
             }
         }
     }
@@ -43,6 +46,20 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
         super.onPageCreate()
     }
 
+    var backToParentPage = true
+    /**
+     * 若指定 parentActivity 则启动
+     * 解决在启动某些Activity后，返回无法回到主页
+     * 若无需跳转，backToParentPage = false
+     */
+    override fun onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && backToParentPage) {
+            parentActivityIntent?.also {
+                startActivityIfNeeded(it, 0)
+            }
+        }
+        super.onBackPressed()
+    }
 }
 
 abstract class NoBindingActivity : ScaffoldActivity<ViewDataBinding>()

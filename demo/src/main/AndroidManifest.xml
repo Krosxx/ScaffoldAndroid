@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.IndexActivity">
+        <activity
+            android:name=".activities.IndexActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,19 +28,23 @@
         <activity
             android:name=".activities.MVVMDemoActivity"
             android:exported="true"
-            android:label="MVVMDemoActivity" />
+            android:label="MVVMDemoActivity"
+            android:parentActivityName=".activities.IndexActivity" />
         <activity
             android:name=".activities.NetTestActivity"
             android:exported="true"
-            android:label="NetTestActivity" />
+            android:label="NetTestActivity"
+            android:parentActivityName=".activities.IndexActivity" />
         <activity
             android:name=".activities.DataFetchActivity"
             android:exported="true"
-            android:label="DataFetchActivity" />
+            android:label="DataFetchActivity"
+            android:parentActivityName=".activities.IndexActivity" />
         <activity
             android:name=".activities.DataListActivity"
             android:exported="true"
-            android:label="DataListActivity" />
+            android:label="DataListActivity"
+            android:parentActivityName=".activities.IndexActivity" />
         <activity
             android:name=".activities.NoBindingTestActivity"
             android:exported="true"
@@ -46,7 +52,8 @@
         <activity
             android:name=".activities.ImagesActivity"
             android:exported="true"
-            android:label="ImagesActivity" />
+            android:label="ImagesActivity"
+            android:parentActivityName=".activities.IndexActivity" />
     </application>
 
 </manifest>
