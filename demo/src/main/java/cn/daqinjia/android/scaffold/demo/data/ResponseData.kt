@@ -1,4 +1,4 @@
-package cn.daqinjia.android.scaffold.net
+package cn.daqinjia.android.scaffold.demo.data
 
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
 import com.google.gson.annotations.SerializedName
@@ -11,21 +11,12 @@ import com.google.gson.annotations.SerializedName
  *
  * @author Vove
  */
-data class BaseResponseData<T>(
+data class ResponseData<T>(
     @SerializedName("errCode", alternate = ["errcode"])
     val code: Int,
     val detail: String?,
     val data: T?,
     val error: Throwable? = null
 ) {
-    val isSuccess get() = code == 0 && error == null
-
-    companion object {
-        const val CODE_EXCEPTION = -9
-
-        fun<T> exception(e: Throwable): BaseResponseData<T> {
-            return BaseResponseData(CODE_EXCEPTION, e.message, null, e)
-        }
-    }
-
+    val isSuccess get() = code == 0
 }

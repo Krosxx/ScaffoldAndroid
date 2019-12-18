@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.app.Api
+import cn.daqinjia.android.scaffold.demo.data.ResponseData
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
-import cn.daqinjia.android.scaffold.net.ResponseData
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
 
@@ -37,6 +37,9 @@ class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
         vm.uiData.observe(this) {
             if ("loading" in it) {
                 binding.error = false
+            }
+            if ("loading_error" in it) {
+                binding.error = true
             }
         }
 
@@ -69,6 +72,13 @@ class NetTestViewModel : ScaffoldViewModel() {
 
     fun load() {
         emitUiState("loading")
-        apiCall(Api::get200, resData)
+        apiCall(Api::get200) {
+            onSuccess {
+                resData.value = it
+            }
+            onFailure {
+                emitUiState("loading_error" to it)
+            }
+        }
     }
 }

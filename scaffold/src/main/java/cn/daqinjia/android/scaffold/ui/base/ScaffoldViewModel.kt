@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cn.daqinjia.android.scaffold.net.BaseResponseData
 import kotlinx.coroutines.launch
 
 /**
@@ -35,35 +34,18 @@ open class ScaffoldViewModel : ViewModel() {
     }
 
     /**
-     * 网络请求 -> LiveData(ld)
-     * 更新LiveData
-     */
-    fun <T> apiCall(
-        callAction: suspend () -> BaseResponseData<T>,
-        ld: MutableLiveData<*>,
-        onSuccess: (() -> Unit)? = null
-    ) {
-        apiCall(callAction) {
-            ld.value = it
-            if (it.isSuccess) {
-                onSuccess?.invoke()
-            }
-        }
-    }
-
-    /**
      *
      * 网络请求 -> LiveData(uiData)
-     * 更新 uiData
+     * 更新 uiData reqName to Result
      */
     fun <T> apiCall(
-        callAction: suspend () -> BaseResponseData<T>,
+        callAction: suspend () -> T,
         reqName: String,
         onSuccess: (() -> Unit)? = null
     ) {
         apiCall(callAction) {
-            emitUiState(reqName to it)
-            if (it.isSuccess) {
+            emitUiState(reqName to this)
+            if (isSuccess) {
                 onSuccess?.invoke()
             }
         }
@@ -74,16 +56,15 @@ open class ScaffoldViewModel : ViewModel() {
      * 成功 req is
      */
     fun <T> apiCall(
-        callAction: suspend () -> BaseResponseData<T>,
-        onResult: ((BaseResponseData<T>) -> Unit)
+        callAction: suspend () -> T,
+        onResult: (Result<T>.() -> Unit)
     ) {
         viewModelScope.launch {
             try {
                 val res = callAction()
-                onResult(res)
+                onResult(Result.success(res))
             } catch (e: Throwable) {
-                val baseReq = BaseResponseData.exception<T>(e)
-                onResult(baseReq)
+                onResult(Result.failure(e))
             }
         }
     }

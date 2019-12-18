@@ -1,6 +1,6 @@
 package cn.daqinjia.android.scaffold.demo.app
 
-import cn.daqinjia.android.scaffold.net.ResponseData
+import cn.daqinjia.android.scaffold.demo.data.ResponseData
 import cn.daqinjia.android.scaffold.net.RestApi
 import cn.daqinjia.android.scaffold.net.RetrofitApiConstants
 import retrofit2.http.GET

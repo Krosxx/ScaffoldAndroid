@@ -91,9 +91,9 @@ class PagingViewMModel : ScaffoldViewModel() {
 
     //ViewMModel 处理结果 通知 UI 更新
     fun loadMore() = apiCall({ Api.list(page) }) {
-        if (it.isSuccess && it.data != null) {
+        if (isSuccess) {
             page++
-            emitUiState("data" to it.data)
+            emitUiState("data" to getOrNull())
         } else {
             if (page < 3) {//假数据
                 page++
