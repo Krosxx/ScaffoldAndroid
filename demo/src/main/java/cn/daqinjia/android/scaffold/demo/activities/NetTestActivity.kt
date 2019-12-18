@@ -66,7 +66,6 @@ class NetTestViewModel : ScaffoldViewModel() {
      * 可以对数据进行缓存（重建时无需再请求数据）
      */
     init {
-        //通过 指定 LiveData 发起请求
         load()
     }
 
