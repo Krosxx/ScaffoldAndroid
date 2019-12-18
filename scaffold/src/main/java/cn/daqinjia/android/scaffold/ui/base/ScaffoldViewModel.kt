@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import cn.daqinjia.android.scaffold.net.ScaffoldApi
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * # ScaffoldViewModel
@@ -14,7 +15,9 @@ import kotlinx.coroutines.launch
  */
 typealias UiData = Map<String, Any?>
 
-open class ScaffoldViewModel : ViewModel() {
+open class ScaffoldViewModel : ViewModel(), ScaffoldApi {
+    override val scope: CoroutineScope
+        get() = viewModelScope
 
     /**
      * 负责传递数据到UI
@@ -33,39 +36,4 @@ open class ScaffoldViewModel : ViewModel() {
         _uiData.value = mapOf(status to null)
     }
 
-    /**
-     *
-     * 网络请求 -> LiveData(uiData)
-     * 更新 uiData reqName to Result
-     */
-    fun <T> apiCall(
-        callAction: suspend () -> T,
-        reqName: String,
-        onSuccess: (() -> Unit)? = null
-    ) {
-        apiCall(callAction) {
-            emitUiState(reqName to this)
-            if (isSuccess) {
-                onSuccess?.invoke()
-            }
-        }
-    }
-
-    /**
-     * 封装网络请求
-     * 成功 req is
-     */
-    fun <T> apiCall(
-        callAction: suspend () -> T,
-        onResult: (Result<T>.() -> Unit)
-    ) {
-        viewModelScope.launch {
-            try {
-                val res = callAction()
-                onResult(Result.success(res))
-            } catch (e: Throwable) {
-                onResult(Result.failure(e))
-            }
-        }
-    }
 }
