@@ -55,7 +55,7 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
     override fun onBackPressed() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && backToParentPage) {
             parentActivityIntent?.also {
-                startActivityIfNeeded(it, 0)
+                startActivity(it)
             }
         }
         super.onBackPressed()
