@@ -3,9 +3,9 @@ package cn.daqinjia.android.scaffold.ui.base
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.ViewDataBinding
 import cn.daqinjia.android.scaffold.R
-import kotlinx.android.synthetic.main.activity_scaffold.*
 
 
 abstract class ScaffoldActivity<VDB : ViewDataBinding>
@@ -17,21 +17,30 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
 
     open val needToolbar = true
 
+    /**
+     * 可自定义 Toolbar 实现
+     * Toolbar 实现 布局 参考 R.layout.toolbar_center_title
+     */
+    open val toolbarImpleRes = R.layout.toolbar_center_title
+
+    lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val rootView = layoutInflater.inflate(R.layout.activity_scaffold, null) as ViewGroup
+        setCustomToolbar(rootView)
         rootView.addView(buildView(rootView, layoutInflater))
         setContentView(rootView)
-        setCustomToolbar()
 
         onPageCreate()
     }
 
-    private fun setCustomToolbar() {
+    private fun setCustomToolbar(rootView: ViewGroup) {
         if (!needToolbar) {
             return
         }
-        toolbar?.apply {
+        toolbar = (layoutInflater.inflate(toolbarImpleRes, rootView, true) as ViewGroup).getChildAt(0) as Toolbar
+        toolbar.apply {
             setSupportActionBar(this)
             if (showReturnIcon) {
                 setNavigationIcon(R.drawable.back_arrow)

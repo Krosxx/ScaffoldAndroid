@@ -1,7 +1,10 @@
 package cn.daqinjia.android.scaffold.demo.activities
 
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.observe
@@ -35,6 +38,18 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
 
     fun onClick(v: View) {
         vm.add()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.simple, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
+
+        return super.onOptionsItemSelected(item)
     }
 }
 

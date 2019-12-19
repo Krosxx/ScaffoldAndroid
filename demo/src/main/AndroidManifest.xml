@@ -61,6 +61,11 @@
             android:exported="true"
             android:label="LogActivity"
             android:parentActivityName=".activities.IndexActivity" />
+        <activity
+            android:name=".activities.ToolbarDemoActivity"
+            android:exported="true"
+            android:label="ToolbarDemoActivity"
+            android:parentActivityName=".activities.IndexActivity" />
     </application>
 
 </manifest>

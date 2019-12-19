@@ -2,8 +2,6 @@ package cn.daqinjia.android.scaffold.demo
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,6 +10,28 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        B()
+    }
+}
+
+open class A {
+    init {
+        printv()
+    }
+
+    open fun printv() {}
+}
+
+class B : A() {
+    private var v = 1
+
+    init {
+        println(v)
+    }
+
+    override fun printv() {
+        // 0
+        v = 2
+        print(v)
     }
 }
