@@ -69,4 +69,5 @@ dependencies {
 
     api "com.github.Vove7.SmartKey:smartkey-android:6.1.2"
 
+    api project(':common')
 }

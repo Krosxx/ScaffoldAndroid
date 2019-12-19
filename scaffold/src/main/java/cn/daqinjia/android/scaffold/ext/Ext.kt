@@ -1,5 +1,6 @@
 package cn.daqinjia.android.scaffold.ext
 
+import android.graphics.Color
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -16,3 +17,5 @@ fun delayRun(millis: Long, block: () -> Unit): Job = GlobalScope.launch {
     delay(millis)
     block()
 }
+
+val String.asColor: Int get() = Color.parseColor(this)

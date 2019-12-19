@@ -1,2 +1,2 @@
-include ':scaffold', ':demo', ':photoview'
+include ':scaffold', ':demo', ':photoview', ':common'
 rootProject.name='ScaffoldAndroid'

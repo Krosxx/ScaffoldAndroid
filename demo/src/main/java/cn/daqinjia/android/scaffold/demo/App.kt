@@ -1,10 +1,11 @@
 package cn.daqinjia.android.scaffold.demo
 
+import android.util.Log
+import cn.daqinjia.android.common.Logger
 import cn.daqinjia.android.scaffold.app.ScaffoldApp
 import cn.daqinjia.android.scaffold.demo.app.AppDatabase
 import cn.daqinjia.android.scaffold.demo.app.appModules
 import cn.daqinjia.android.scaffold.demo.data.Config
-import cn.daqinjia.android.scaffold.demo.data.set
 import glimpse.core.Glimpse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,6 +33,11 @@ class App : ScaffoldApp() {
         }
 
         Glimpse.init(this)
+
+        Logger {
+            outputLevel = if(BuildConfig.DEBUG) Log.VERBOSE else 100
+            callstackDepth = 3
+        }
     }
 
 }
