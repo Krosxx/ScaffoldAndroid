@@ -1,4 +1,23 @@
 
+### parentActivityName
+
+在某些界面直接启动后，通过返回想进入主页
+
+
+可指定 `parentActivityName` 并继承 `ScaffoldActivity` 实现
+
+```kotlin
+class XXXActivity : ScaffoldActivity
+```
+```xml
+<activity
+    android:name=".XXXActivity"
+    android:parentActivityName=".activities.MainActivity" />
+```
+
+**经测试指定 android:parentActivityName, 直接进入XXXActivity 按返回键无法跳回主页**
+
+
 
 ### [glimpse-android](https://github.com/the-super-toys/glimpse-android)
 
