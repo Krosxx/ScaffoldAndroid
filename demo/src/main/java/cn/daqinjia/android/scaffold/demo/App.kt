@@ -1,6 +1,8 @@
 package cn.daqinjia.android.scaffold.demo
 
+import android.content.Context
 import android.util.Log
+import androidx.multidex.MultiDex
 import cn.daqinjia.android.common.Logger
 import cn.daqinjia.android.scaffold.app.ScaffoldApp
 import cn.daqinjia.android.scaffold.demo.app.AppDatabase
@@ -40,4 +42,8 @@ class App : ScaffoldApp() {
         }
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 }
