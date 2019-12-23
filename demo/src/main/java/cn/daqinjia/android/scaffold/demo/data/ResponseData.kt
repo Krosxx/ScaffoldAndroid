@@ -15,8 +15,7 @@ data class ResponseData<T>(
     @SerializedName("errCode", alternate = ["errcode"])
     val code: Int,
     val detail: String?,
-    val data: T?,
-    val error: Throwable? = null
+    val data: T?
 ) {
     val isSuccess get() = code == 0
 }
