@@ -72,6 +72,12 @@ class NetTestViewModel : ScaffoldViewModel() {
     fun load() {
         emitUiState("loading")
         apiCall(Api::get200) {
+//            此处非回调，等价于：
+//            if (isSuccess) {
+//
+//            } else {
+//
+//            }
             onSuccess {
                 resData.value = it
             }
