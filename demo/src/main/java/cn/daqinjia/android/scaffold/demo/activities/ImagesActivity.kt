@@ -21,8 +21,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class ImagesActivity : NoBindingActivity() {
 
-    //skio 注入
-    private val vm :ImagesViewModel by viewModel()
+    //koin 注入
+    private val vm: ImagesViewModel by viewModel()
 
     private val adapter by lazy {
         ImagesAdapter().apply {
