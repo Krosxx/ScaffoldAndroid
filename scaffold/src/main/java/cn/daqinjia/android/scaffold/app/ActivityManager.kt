@@ -27,6 +27,8 @@ object ActivityManager : Application.ActivityLifecycleCallbacks {
     operator fun get(actCls: KClass<*>): Activity? =
         activities.keys.find { it::class == actCls }
 
+    operator fun get(act: Activity): ActivityStatus? = activities[act]
+
     override fun onActivityPaused(activity: Activity) {
         activities[activity] = ActivityStatus.PAUSED
     }

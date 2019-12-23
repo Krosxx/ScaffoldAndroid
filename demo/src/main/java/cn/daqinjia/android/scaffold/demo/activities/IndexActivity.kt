@@ -3,7 +3,6 @@ package cn.daqinjia.android.scaffold.demo.activities
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,10 @@ import android.widget.AbsListView
 import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import cn.daqinjia.android.scaffold.demo.R
+import cn.daqinjia.android.scaffold.ui.base.NoBindingActivity
 import com.github.ielse.imagewatcher.PhotoViewActivity
 
 /**
@@ -23,7 +22,11 @@ import com.github.ielse.imagewatcher.PhotoViewActivity
  *
  * @author Vove
  */
-class IndexActivity : AppCompatActivity() {
+class IndexActivity : NoBindingActivity() {
+    override val layoutRes: Int = 0
+
+    override val showReturnIcon: Boolean = false
+
     private val excludeActivity = arrayOf(
         PhotoViewActivity::class,
         IndexActivity::class
@@ -35,8 +38,7 @@ class IndexActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initView() {
         setContentView(buildContentView())
     }
 

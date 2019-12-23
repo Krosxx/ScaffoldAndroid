@@ -57,3 +57,16 @@ android {
 }
 
 ```
+
+### 适配安卓Q DarkMode
+
+在 `Application` 配置
+
+```kotlin
+ScaffoldActivity.apply {
+    enableThamable = true
+    darkTheme = R.style.DarkTheme
+}
+```
+
+style 参考 [demo/styles.xml](src/main/res/values/styles.xml)

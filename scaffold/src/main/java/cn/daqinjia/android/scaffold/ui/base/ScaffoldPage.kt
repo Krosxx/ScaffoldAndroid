@@ -14,9 +14,11 @@ interface ScaffoldPage<VDB : ViewDataBinding> {
 
     val layoutRes: Int
 
-    fun buildView(container: ViewGroup? = null, layoutInflater: LayoutInflater): View {
+    fun buildView(container: ViewGroup? = null, layoutInflater: LayoutInflater): View? {
         val inflateView by lazy {
-            layoutInflater.inflate(layoutRes, container, false)
+            //支持 不指定布局资源
+            if (layoutRes == 0) null
+            else layoutInflater.inflate(layoutRes, container, false)
         }
         return try {
             DataBindingUtil.inflate<VDB>(layoutInflater, layoutRes, container, false)?.let {

@@ -8,6 +8,7 @@ import cn.daqinjia.android.scaffold.app.ScaffoldApp
 import cn.daqinjia.android.scaffold.demo.app.AppDatabase
 import cn.daqinjia.android.scaffold.demo.app.appModules
 import cn.daqinjia.android.scaffold.demo.data.Config
+import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import glimpse.core.Glimpse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,6 +40,10 @@ class App : ScaffoldApp() {
         Logger {
             outputLevel = if(BuildConfig.DEBUG) Log.VERBOSE else 100
             callstackDepth = 3
+        }
+        ScaffoldActivity.apply {
+            enableThamable = true
+            darkTheme = R.style.DarkTheme
         }
     }
 
