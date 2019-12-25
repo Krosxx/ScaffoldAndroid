@@ -1,6 +1,6 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "unused", "UNUSED_PARAMETER")
 
-package cn.daqinjia.android.scaffold.ext
+package cn.daqinjia.android.common.ext
 
 import android.content.res.Resources
 

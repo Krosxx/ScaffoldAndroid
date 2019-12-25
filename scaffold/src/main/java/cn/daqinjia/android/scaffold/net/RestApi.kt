@@ -1,7 +1,7 @@
 package cn.daqinjia.android.scaffold.net
 
 import cn.daqinjia.android.scaffold.BuildConfig
-import cn.daqinjia.android.scaffold.ext.ReflectExt.get
+import cn.daqinjia.android.common.ext.ReflectExt.get
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

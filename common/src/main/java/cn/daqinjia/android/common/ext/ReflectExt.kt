@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package cn.daqinjia.android.scaffold.ext
+package cn.daqinjia.android.common.ext
 
 import java.lang.reflect.Field
 import java.lang.reflect.Method

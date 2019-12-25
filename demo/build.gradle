@@ -74,6 +74,7 @@ dependencies {
 
     implementation project(':scaffold')
     implementation project(':photoview')
+    implementation project(':ui-design')
 
     // Room DB
     kapt libs.jetpack_room_compiler

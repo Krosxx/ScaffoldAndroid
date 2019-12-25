@@ -4,10 +4,10 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import cn.daqinjia.android.scaffold.ext.fadeIn
-import cn.daqinjia.android.scaffold.ext.fadeOut
-import cn.daqinjia.android.scaffold.ext.gone
-import cn.daqinjia.android.scaffold.ext.show
+import cn.daqinjia.android.common.ext.fadeIn
+import cn.daqinjia.android.common.ext.fadeOut
+import cn.daqinjia.android.common.ext.gone
+import cn.daqinjia.android.common.ext.show
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation

@@ -12,7 +12,7 @@ import cn.daqinjia.android.common.Logger.logv
 import cn.daqinjia.android.common.Logger.logw
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityLogBinding
-import cn.daqinjia.android.scaffold.ext.spanColor
+import cn.daqinjia.android.common.ext.spanColor
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import kotlinx.android.synthetic.main.activity_log.*
 

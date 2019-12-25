@@ -8,7 +8,7 @@ import android.view.Menu
 import androidx.appcompat.widget.ActionMenuView
 import androidx.appcompat.widget.Toolbar
 import cn.daqinjia.android.scaffold.R
-import cn.daqinjia.android.scaffold.ext.show
+import cn.daqinjia.android.common.ext.show
 import kotlinx.android.synthetic.main.layout_toolbar_center_title.view.*
 
 /**

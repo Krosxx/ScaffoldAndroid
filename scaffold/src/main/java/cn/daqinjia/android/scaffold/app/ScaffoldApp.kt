@@ -1,7 +1,7 @@
 package cn.daqinjia.android.scaffold.app
 
 import android.app.Application
-import cn.daqinjia.android.scaffold.ext.delayRun
+import cn.daqinjia.android.common.ext.delayRun
 
 /**
  * # ScaffoldApp

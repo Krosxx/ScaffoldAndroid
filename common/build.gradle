@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libs.kotlin_stdlib
+    api libs.kotlin_reflect
+    api libs.kotlin_coroutines
 
     testImplementation 'junit:junit:4.12'
 }

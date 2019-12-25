@@ -1,4 +1,4 @@
-package cn.daqinjia.android.scaffold.ext
+package cn.daqinjia.android.common.ext
 
 import android.graphics.Color
 import kotlinx.coroutines.GlobalScope

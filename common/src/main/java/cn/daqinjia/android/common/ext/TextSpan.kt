@@ -1,4 +1,4 @@
-package cn.daqinjia.android.scaffold.ext
+package cn.daqinjia.android.common.ext
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned
