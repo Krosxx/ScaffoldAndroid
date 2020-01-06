@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 class ImagesRepo {
 
     suspend fun getImages(): List<String> {
-        delay(1000)
+        delay(3000)
         return listOf(
             "photo-1558981001-1995369a39cd",
             "flagged/photo-1575556809963-3d9e5730eda0",

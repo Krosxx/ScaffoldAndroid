@@ -2,12 +2,14 @@ package cn.daqinjia.android.scaffold.demo.activities
 
 import androidx.lifecycle.liveData
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 import cn.daqinjia.android.scaffold.demo.BR
 import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.repo.ImagesRepo
 import cn.daqinjia.android.scaffold.ui.base.BaseBindAdapter
 import cn.daqinjia.android.scaffold.ui.base.NoBindingActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
+import com.cooltechworks.views.shimmer.ShimmerAdapter
 import com.github.ielse.imagewatcher.PhotoViewActivity
 import com.github.ielse.imagewatcher.start
 import kotlinx.android.synthetic.main.activity_images.*
@@ -38,12 +40,16 @@ class ImagesActivity : NoBindingActivity() {
 
     override fun onObserveLiveData() {
         vm.imgData.observe(this) {
+            if (recycler_view.adapter is ShimmerAdapter) {
+                recycler_view.layoutManager = GridLayoutManager(this, 2)
+                recycler_view.adapter = adapter
+            }
             adapter.setNewData(it)
         }
     }
 
     override fun initView() {
-        recycler_view.adapter = adapter
+        recycler_view.showShimmerAdapter()
     }
 
     override val layoutRes: Int
