@@ -20,6 +20,8 @@ interface TextSizeableDelegate {
         var lastChangedTextSizeTime by smartKey(0L)
     }
 
+    val textSizeChangeable: Boolean
+
     /**
      * Activity进入时间（加载资源时间，用于修改字体）
      */
@@ -32,7 +34,7 @@ interface TextSizeableDelegate {
      */
     fun _attachBaseContext(base: Context) {
         loadTime = System.currentTimeMillis()
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        if (textSizeChangeable && Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
             val res = base.resources
             val config = res.configuration
 
@@ -69,7 +71,7 @@ interface TextSizeableDelegate {
 
     fun _onResume() {
         val lastChangedTextSizeTime = lastChangedTextSizeTime
-        if (loadTime < lastChangedTextSizeTime) {
+        if (textSizeChangeable && loadTime < lastChangedTextSizeTime) {
             reStart()
         }
     }

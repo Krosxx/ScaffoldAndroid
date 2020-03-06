@@ -12,12 +12,16 @@ import androidx.appcompat.app.AppCompatActivity
  *
  * @author Vove
  */
-open class TextSizeableActivity : AppCompatActivity(), TextSizeableDelegate {
+abstract class TextSizeableActivity : AppCompatActivity(), TextSizeableDelegate {
+
     override var loadTime: Long = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _onCreate()
+        if (textSizeChangeable) {
+            _onCreate()
+        }
     }
 
     override fun superAttachBaseContext(base: Context) {
@@ -29,7 +33,11 @@ open class TextSizeableActivity : AppCompatActivity(), TextSizeableDelegate {
     }
 
     override fun getResources(): Resources? {
-        return _getResources(super.getResources())
+        return if(textSizeChangeable){
+            _getResources(super.getResources())
+        }else{
+            super.getResources()
+        }
     }
 
     override fun reStart() {

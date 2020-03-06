@@ -31,6 +31,9 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
     //需要显示Toolbar
     open val needToolbar = true
 
+    override val textSizeChangeable: Boolean
+        get() = supportFontSizeChangeable
+
     /**
      * 自定义 Toolbar 实现
      * Toolbar 实现 布局 参考 R.layout.toolbar_center_title
@@ -46,6 +49,8 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
         var enableThamable = false
         //Android Q DarkMode style 资源
         var darkTheme: Int = 0
+        //支持字体大小可修改
+        var supportFontSizeChangeable = false
     }
 
     private val isDarkMode: Boolean
