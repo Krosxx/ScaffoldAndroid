@@ -43,12 +43,15 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
     //toolbar 实例
     lateinit var toolbar: Toolbar
 
-    //
+    //Activity 暗黑主题
+    open val darkTheme: Int = globalDarkTheme
+
+    //配置
     companion object {
         //开启适配 DarkMode
         var enableThamable = false
         //Android Q DarkMode style 资源
-        var darkTheme: Int = 0
+        var globalDarkTheme: Int = 0
         //支持字体大小可修改
         var supportFontSizeChangeable = false
     }
