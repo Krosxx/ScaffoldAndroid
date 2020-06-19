@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="common" target="1.7" />
+      <module name="demo" target="1.8" />
+      <module name="photoview" target="1.7" />
+      <module name="scaffold" target="1.8" />
+      <module name="ScaffoldAndroid.common" target="1.7" />
+      <module name="ScaffoldAndroid.demo" target="1.8" />
+      <module name="ScaffoldAndroid.photoview" target="1.7" />
+      <module name="ScaffoldAndroid.scaffold" target="1.8" />
+      <module name="ScaffoldAndroid.ui-design" target="1.7" />
+      <module name="ui-design" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

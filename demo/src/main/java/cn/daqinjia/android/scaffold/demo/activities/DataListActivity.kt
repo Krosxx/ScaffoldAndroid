@@ -1,5 +1,6 @@
 package cn.daqinjia.android.scaffold.demo.activities
 
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.observe
 import cn.daqinjia.android.scaffold.demo.BR
@@ -17,6 +18,15 @@ import kotlinx.android.synthetic.main.activity_data_list.*
  * # DataListActivity
  * Created on 2019/11/26
  *
+ *
+ * 处理流程：
+ * 显示加载失败
+ * 显示无数据
+ * 刷新显示数据
+ * 加载更多
+ * 加载失败
+ * 失败加载
+ *
  * @author Vove
  */
 class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
@@ -24,7 +34,7 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
         get() = R.layout.activity_data_list
 
     // lazy init
-    private val vm: PagingViewMModel by viewModelOf()
+    private val vm: PagingViewModel by viewModelOf()
 
     private val listAdapter by lazy {
         PagingListAdapter().apply {
@@ -32,6 +42,8 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
             setOnLoadMoreListener({ loadMore() }, listView)
 
             //TODO 监听 Button
+
+
             setOnItemClickListener { ada, view, position ->
                 val i = ada.getItem(position)
                 Toast.makeText(this@DataListActivity, "$i", Toast.LENGTH_SHORT).show()
@@ -43,6 +55,14 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
         vm.uiData.observe(this) { ds ->
             (ds["data"] as Array<Int>?)?.also {
                 if (it.isEmpty()) {
+                    listAdapter.emptyView = TextView(this).apply {
+                        text = "空空如也"
+                        setOnClickListener {
+                            refresh()
+                        }
+                    }
+                    page++
+                    swipeView.isRefreshing = false
                     listAdapter.loadMoreComplete()
                     listAdapter.loadMoreEnd()
                 } else {
@@ -51,6 +71,7 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
                         swipeView.isRefreshing = false
                     } else {
                         listAdapter.addData(it.toList())
+                        page++
                     }
                     listAdapter.setEnableLoadMore(true)
                     listAdapter.loadMoreComplete()
@@ -58,6 +79,14 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
 
             }
             if ("failed" in ds) {
+                if (page == -1) {
+                    listAdapter.emptyView = TextView(this).apply {
+                        text = "网络错误，点击重试"
+                        setOnClickListener {
+                            refresh(0)
+                        }
+                    }
+                }
                 if (swipeView.isRefreshing) {
                     swipeView.isRefreshing = false
                 } else {
@@ -66,48 +95,60 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
             }
 
         }
-
     }
 
+    var page = -1
     override fun initView() {
         listView.adapter = listAdapter
         swipeView.setOnRefreshListener { refresh() }
-        refresh()
+        refresh(-1)
     }
-
 
     private fun loadMore() {
-        vm.loadMore()
+        vm.getDataList(page)
     }
 
-    private fun refresh() {
+    private fun refresh(p: Int = 1) {
+        page = p
+        listAdapter.setEnableLoadMore(false)
         swipeView.isRefreshing = true
-        vm.refresh()
+        vm.getDataList(page)
     }
 }
 
-class PagingViewMModel : ScaffoldViewModel() {
-    var page = 0
+class PagingViewModel : ScaffoldViewModel() {
 
+    var f = 0
     //ViewMModel 处理结果 通知 UI 更新
-    fun loadMore() = apiCall({ Api.list(page) }) {
-        if (isSuccess) {
-            page++
+    fun getDataList(page: Int) = apiCall({ Api.list(page) }) {
+        if (page == 0) {
+            emitUiState("data" to arrayOf<Int>())
+            return@apiCall
+        }
+        if (page == -1) {
+            emitUiState("failed" to true)
+            return@apiCall
+        }
+        //非回调  同 if(isSuccesss)
+        onSuccess {
             emitUiState("data" to getOrNull())
-        } else {
-            if (page < 3) {//假数据
-                page++
-                emitUiState("data" to arrayOf(-1, -1, -1, -1, 0))
-            } else {
-                emitUiState("failed" to true)
+        }
+        //非回调
+        onFailure {
+            when {
+                page < 3 -> {//假数据
+                    emitUiState("data" to arrayOf(-1, -1, -1, -1, 0))
+                }
+                f < 2 -> {
+                    f++
+                    emitUiState("failed" to true)
+                }
+                else -> {
+                    emitUiState("data" to arrayOf<Int>())
+                }
             }
 
         }
-    }
-
-    fun refresh() {
-        page = 0
-        loadMore()
     }
 
 }

@@ -23,12 +23,7 @@ interface ScaffoldApi {
         onResult: (Result<T>.() -> Unit)
     ) {
         scope.launch {
-            try {
-                val res = callAction()
-                onResult(Result.success(res))
-            } catch (e: Throwable) {
-                onResult(Result.failure(e))
-            }
+            onResult(kotlin.runCatching { callAction() })
         }
     }
 

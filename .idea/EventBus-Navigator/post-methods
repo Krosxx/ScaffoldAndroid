@@ -1,0 +1,4 @@
+org.greenrobot.eventbus.EventBus.post
+org.greenrobot.eventbus.EventBus.postSticky
+com.wlemuel.hysteria_android.app.AppBus.post
+com.wlemuel.hysteria_android.app.AppBus.postSticky

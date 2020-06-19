@@ -6,6 +6,8 @@
     <uses-sdk tools:overrideLibrary="glimpse.core, glimpse.glide" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -66,10 +68,14 @@
             android:exported="true"
             android:label="ToolbarDemoActivity"
             android:parentActivityName=".activities.IndexActivity" />
-        <activity android:name=".activities.DesignCodeActivity"
+        <activity
+            android:name=".activities.DesignCodeActivity"
             android:exported="true"
             android:label="@string/design_code"
             android:parentActivityName=".activities.IndexActivity" />
+        <activity
+            android:name=".activities.ExternalStorageTestActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

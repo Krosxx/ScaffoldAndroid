@@ -70,7 +70,6 @@ interface TextSizeableDelegate {
     }
 
     fun _onResume() {
-        val lastChangedTextSizeTime = lastChangedTextSizeTime
         if (textSizeChangeable && loadTime < lastChangedTextSizeTime) {
             reStart()
         }
