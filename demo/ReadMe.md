@@ -15,18 +15,22 @@ class XXXActivity : ScaffoldActivity
     android:parentActivityName=".activities.MainActivity" />
 ```
 
-**经测试指定 android:parentActivityName, 直接进入XXXActivity 按返回键无法跳回主页**
+**经测试，仅指定 android:parentActivityName, 直接进入XXXActivity 按返回键无法跳回主页**
 
 
 
 ### [glimpse-android](https://github.com/the-super-toys/glimpse-android)
 
-保证图片主体部分在显示区
+>  保证图片主体部分在显示区
 
-未开启与开启后：
+效果：
 
-![](img/d1.png)
-![](img/d0.png)
+| 未开启          | 开启后          |
+| --------------- | --------------- |
+| ![](img/d1.png) | ![](img/d0.png) |
+
+
+使用 `databinding` 仅需指定 `app:glimpse="@{true}"`
 
 ```xml
 <ImageView
@@ -60,7 +64,13 @@ android {
 
 ### 适配安卓Q DarkMode
 
-在 `Application` 配置
+- 跟随系统
+
+  可以建立`night` 资源，系统自动切换主题。如 `values-night`。
+
+- 手动设置
+
+  在 `Application` 配置
 
 ```kotlin
 ScaffoldActivity.apply {
@@ -70,7 +80,6 @@ ScaffoldActivity.apply {
 ```
 
 style 参考 [demo/styles.xml](src/main/res/values/styles.xml)
-
 
 ### [ShimmerRecyclerView](https://github.com/sharish/ShimmerRecyclerView)
 
@@ -93,4 +102,4 @@ style 参考 [demo/styles.xml](src/main/res/values/styles.xml)
 </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
 ```
 
-![](https://raw.githubusercontent.com/sharish/ShimmerRecyclerView/master/screenshots/list_demo.gif)
+<img width=300 src="https://raw.githubusercontent.com/sharish/ShimmerRecyclerView/master/screenshots/list_demo.gif">
