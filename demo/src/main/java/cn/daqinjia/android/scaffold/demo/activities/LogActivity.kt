@@ -22,9 +22,7 @@ import kotlinx.android.synthetic.main.activity_log.*
  * Created on 2019/12/19
  * @author Vove
  */
-class LogActivity : ScaffoldActivity<ActivityLogBinding>() {
-    override val layoutRes: Int
-        get() = R.layout.activity_log
+class LogActivity : ScaffoldActivity<ActivityLogBinding>(ActivityLogBinding::class) {
 
     private val lcMap = mapOf(
         Log.VERBOSE to Color.BLACK,

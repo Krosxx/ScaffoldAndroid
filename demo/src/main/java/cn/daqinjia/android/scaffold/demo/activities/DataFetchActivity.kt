@@ -16,9 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  *
  * @author Vove
  */
-class DataFetchActivity : ScaffoldActivity<ActivityDataFetchBinding>() {
-    override val layoutRes: Int
-        get() = R.layout.activity_data_fetch
+class DataFetchActivity : ScaffoldActivity<ActivityDataFetchBinding>(ActivityDataFetchBinding::class) {
 
     private val vm: MStepViewModel by viewModel()
 

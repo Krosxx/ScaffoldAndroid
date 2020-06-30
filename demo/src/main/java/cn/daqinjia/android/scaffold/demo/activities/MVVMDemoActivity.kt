@@ -16,8 +16,7 @@ import cn.daqinjia.android.scaffold.demo.databinding.ActivityMvvmDemoBinding
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
-    override val layoutRes: Int get() = R.layout.activity_mvvm_demo
+class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>(ActivityMvvmDemoBinding::class) {
 
     //koin fun viewModel() 注入repo
     private val vm: DemoViewModel by viewModel()

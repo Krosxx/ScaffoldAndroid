@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import cn.daqinjia.android.scaffold.R
 import cn.daqinjia.android.scaffold.app.ActivityManager
 import cn.daqinjia.android.scaffold.app.ActivityStatus
+import kotlin.reflect.KClass
 
 /**
  * # ScaffoldActivity
@@ -20,8 +21,12 @@ import cn.daqinjia.android.scaffold.app.ActivityStatus
  * Created on 2019/12/13
  * @author Vove
  */
-abstract class ScaffoldActivity<VDB : ViewDataBinding>
+abstract class ScaffoldActivity<VDB : ViewDataBinding>(vdbCls: KClass<VDB>)
     : ScaffoldPage<VDB>, TextSizeableActivity() {
+
+    override val vdbCls: KClass<VDB> = vdbCls
+
+    override val layoutRes: Int = 0
 
     override lateinit var _binding: ViewDataBinding
 
@@ -141,4 +146,4 @@ abstract class ScaffoldActivity<VDB : ViewDataBinding>
     val status: ActivityStatus get() = ActivityManager[this] ?: ActivityStatus.STOPPED
 }
 
-abstract class NoBindingActivity : ScaffoldActivity<ViewDataBinding>()
+abstract class NoBindingActivity : ScaffoldActivity<ViewDataBinding>(ViewDataBinding::class)

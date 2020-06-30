@@ -4,13 +4,13 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
-import cn.daqinjia.android.scaffold.demo.R
 import cn.daqinjia.android.scaffold.demo.app.Api
 import cn.daqinjia.android.scaffold.demo.data.ResponseData
 import cn.daqinjia.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.daqinjia.android.scaffold.ext.viewModelOf
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldActivity
 import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
+import kotlin.reflect.KClass
 
 /**
  * # NetTestActivity
@@ -27,9 +27,7 @@ import cn.daqinjia.android.scaffold.ui.base.ScaffoldViewModel
  *
  * @author Vove
  */
-class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
-    override val layoutRes: Int
-        get() = R.layout.activity_net_test
+class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>(ActivityNetTestBinding::class) {
 
     private val vm by viewModelOf<NetTestViewModel>()
 

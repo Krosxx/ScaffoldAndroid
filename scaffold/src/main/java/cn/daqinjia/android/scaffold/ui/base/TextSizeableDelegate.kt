@@ -28,6 +28,7 @@ interface TextSizeableDelegate {
     var loadTime: Long
 
     fun superAttachBaseContext(base: Context)
+
     /**
      * 安卓N以上
      * @param base Context

@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import kotlin.reflect.KClass
 
 
 interface ScaffoldPage<VDB : ViewDataBinding> {
+    val vdbCls: KClass<VDB>
     var _binding: ViewDataBinding
 
     val binding: VDB get() = _binding as VDB
@@ -21,10 +23,14 @@ interface ScaffoldPage<VDB : ViewDataBinding> {
             else layoutInflater.inflate(layoutRes, container, false)
         }
         return try {
-            DataBindingUtil.inflate<VDB>(layoutInflater, layoutRes, container, false)?.let {
-                _binding = it
-                it.root
-            } ?: inflateView
+            val m = vdbCls.java.getDeclaredMethod(
+                "inflate",
+                LayoutInflater::class.java,
+                ViewGroup::class.java,
+                Boolean::class.java
+            )
+            _binding = m.invoke(null, layoutInflater, container, false) as VDB
+            _binding.root
         } catch (e: Throwable) {
             inflateView
         }

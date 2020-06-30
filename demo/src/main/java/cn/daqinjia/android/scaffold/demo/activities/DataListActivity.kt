@@ -29,9 +29,7 @@ import kotlinx.android.synthetic.main.activity_data_list.*
  *
  * @author Vove
  */
-class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
-    override val layoutRes: Int
-        get() = R.layout.activity_data_list
+class DataListActivity : ScaffoldActivity<ActivityDataListBinding>(ActivityDataListBinding::class) {
 
     // lazy init
     private val vm: PagingViewModel by viewModelOf()
@@ -40,9 +38,6 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
         PagingListAdapter().apply {
             setLoadMoreView(SimpleLoadMoreView())
             setOnLoadMoreListener({ loadMore() }, listView)
-
-            //TODO 监听 Button
-
 
             setOnItemClickListener { ada, view, position ->
                 val i = ada.getItem(position)
@@ -119,6 +114,7 @@ class DataListActivity : ScaffoldActivity<ActivityDataListBinding>() {
 class PagingViewModel : ScaffoldViewModel() {
 
     var f = 0
+
     //ViewMModel 处理结果 通知 UI 更新
     fun getDataList(page: Int) = apiCall({ Api.list(page) }) {
         if (page == 0) {

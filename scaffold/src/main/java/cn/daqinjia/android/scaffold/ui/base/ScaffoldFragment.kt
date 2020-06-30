@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import kotlin.reflect.KClass
 
 /**
  * # ScaffoldFragment
@@ -13,7 +14,13 @@ import androidx.fragment.app.Fragment
  *
  * @author Vove
  */
-abstract class ScaffoldFragment<VDB : ViewDataBinding> : Fragment(), ScaffoldPage<VDB> {
+abstract class ScaffoldFragment<VDB : ViewDataBinding>(vdbCls: KClass<VDB>)
+    : Fragment(), ScaffoldPage<VDB> {
+
+    override val layoutRes: Int = 0
+
+    override val vdbCls: KClass<VDB> = vdbCls
+
     override lateinit var _binding: ViewDataBinding
 
     override fun onCreateView(
