@@ -14,11 +14,12 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.ViewPager
+import cn.vove7.android.scaffold.ui.base.ScaffoldActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.github.ielse.imagewatcher.databinding.ActivityPhotoViewBinding
 import com.github.ielse.imagewatcher.viewprovider.DefaultLoadingUIProvider
-import kotlinx.android.synthetic.main.activity_photo_view.*
 import java.util.*
 
 
@@ -84,7 +85,8 @@ fun PhotoViewActivity.Companion.start(
  * @author Vove
  * 2019/7/9
  */
-class PhotoViewActivity : AppCompatActivity(), ImageWatcher.OnStateChangedListener {
+class PhotoViewActivity : ScaffoldActivity<ActivityPhotoViewBinding>(),
+    ImageWatcher.OnStateChangedListener {
 
     companion object {
         internal val newTag: Int
@@ -134,7 +136,7 @@ class PhotoViewActivity : AppCompatActivity(), ImageWatcher.OnStateChangedListen
 
 
     override fun onBackPressed() {
-        if (!image_watcher.handleBackPressed()) {
+        if (!findViewById<ImageWatcher>(R.id.image_watcher) .handleBackPressed()) {
             super.onBackPressed()
         }
     }
@@ -160,28 +162,28 @@ class PhotoViewActivity : AppCompatActivity(), ImageWatcher.OnStateChangedListen
         initWatcher()
         initContainer()
         viewData.provider?.apply {
-            attachWatcher(image_watcher)
+            attachWatcher(binding.imageWatcher)
             attachActivity(this@PhotoViewActivity)
         }
 
         viewData.apply {
             if (fromView != null) {
-                image_watcher.show(fromView, rawImgUrls, initPostion)
+                binding.imageWatcher.show(fromView, rawImgUrls, initPostion)
             } else {
-                image_watcher.show(rawImgUrls ?: emptyList(), initPostion)
+                binding.imageWatcher.show(rawImgUrls ?: emptyList(), initPostion)
             }
         }
     }
 
     private fun initContainer() {
         viewData.provider?.extLayout?.also {
-            outContainer.addView(layoutInflater.inflate(it, null))
-            viewData.provider?.onInitView(outContainer)
+            binding.outContainer.addView(layoutInflater.inflate(it, null))
+            viewData.provider?.onInitView(binding.outContainer)
         }
     }
 
     private fun initWatcher() {
-        image_watcher.apply {
+        binding.imageWatcher.apply {
             setLoader(GlideSimpleLoader())
             setLoadingUIProvider(DefaultLoadingUIProvider())
             setOnPictureLongPressListener { v, uri, pos ->
@@ -213,7 +215,7 @@ class PhotoViewActivity : AppCompatActivity(), ImageWatcher.OnStateChangedListen
     ) {
         when (actionTag) {
             ImageWatcher.STATE_EXIT_HIDING -> finish()
-            ImageWatcher.STATE_ENTER_DISPLAYING -> outContainer.visibility = View.VISIBLE
+            ImageWatcher.STATE_ENTER_DISPLAYING -> binding.outContainer.visibility = View.VISIBLE
         }
     }
 

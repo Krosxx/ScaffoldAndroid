@@ -14,16 +14,16 @@ abstract class LoadingUIProvider {
     var runDelayDisplay: Runnable? = null
 
     internal fun start(loadView: View) {
-        if (runDelayDisplay != null) mHandler.removeCallbacks(runDelayDisplay)
+        runDelayDisplay?.also { mHandler.removeCallbacks(it) }
         runDelayDisplay = Runnable {
             loadView.visibility = View.VISIBLE
+        }.also {
+            mHandler.postDelayed(it, 500)
         }
-        mHandler.postDelayed(runDelayDisplay, 500)
     }
 
     internal fun stop(loadView: View) {
-        if (runDelayDisplay != null)
-            mHandler.removeCallbacks(runDelayDisplay)
+        runDelayDisplay?.also { mHandler.removeCallbacks(it) }
         loadView.visibility = View.GONE
     }
 }

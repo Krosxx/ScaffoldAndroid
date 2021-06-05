@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion build_version.compileSdkVersion
 
@@ -29,5 +28,5 @@ dependencies {
     api libs.kotlin_reflect
     api libs.kotlin_coroutines
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 }

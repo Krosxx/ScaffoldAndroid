@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion build_version.compileSdkVersion
@@ -14,12 +13,18 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
+
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     implementation libs.kotlin_stdlib
     implementation libs.appcompat
+    implementation project(":scaffold")
     api libs.glide
 
 }
