@@ -2,6 +2,7 @@
 
 # ScaffoldAndroid
 
+[![](https://jitpack.io/v/Vove7/ScaffoldAndroid.svg)](https://jitpack.io/#Vove7/ScaffoldAndroid)
 
 > 支持 ViewBinding & DataBinding 摆脱 layoutId
 
