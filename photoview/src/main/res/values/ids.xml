@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <item name="image_orientation" type="id" />
+    <item name="state_origin" type="id" />
+    <item name="state_default" type="id" />
+    <item name="state_current" type="id" />
+    <item name="state_thumb" type="id" />
+    <item name="state_temp" type="id" />
+    <item name="state_exit" type="id" />
+    <item name="state_touch_drag" type="id" />
+    <item name="state_touch_scale" type="id" />
+    <item name="view_image_watcher" type="id" />
+    <item name="view_decoration" type="id"/>
+    <!--高宽比例-->
+    <item name="hw_proportion" type="id"/>
+
+    <item name="drawable_0" type="id"/>
+    <item name="drawable_1" type="id"/>
+    <item name="drawable_2" type="id"/>
+    <item name="drawable_3" type="id"/>
+    <item name="drawable_obj_0" type="id"/>
+    <item name="drawable_obj_1" type="id"/>
+    <item name="drawable_obj_2" type="id"/>
+    <item name="drawable_obj_3" type="id"/>
+
+</resources>

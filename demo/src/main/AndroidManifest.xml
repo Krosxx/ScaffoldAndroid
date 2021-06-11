@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="cn.vove7.android.scaffold.demo">
+
+    <uses-sdk tools:overrideLibrary="glimpse.core, glimpse.glide" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="cn.vove7.android.scaffold.demo.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <!--主页 指定 launchMode="singleTask" -->
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.IndexActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.MVVMDemoActivity"
+            android:exported="true"
+            android:label="MVVMDemoActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.NetTestActivity"
+            android:exported="true"
+            android:label="NetTestActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.DataFetchActivity"
+            android:exported="true"
+            android:label="DataFetchActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.DataListActivity"
+            android:exported="true"
+            android:label="DataListActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.NoBindingTestActivity"
+            android:exported="true"
+            android:label="NoBindingTestActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.ImagesActivity"
+            android:exported="true"
+            android:label="ImagesActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.LogActivity"
+            android:exported="true"
+            android:label="LogActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.ToolbarDemoActivity"
+            android:exported="true"
+            android:label="ToolbarDemoActivity"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.DesignCodeActivity"
+            android:exported="true"
+            android:label="@string/design_code"
+            android:parentActivityName="cn.vove7.android.scaffold.demo.activities.IndexActivity" />
+        <activity
+            android:name="cn.vove7.android.scaffold.demo.activities.ExternalStorageTestActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

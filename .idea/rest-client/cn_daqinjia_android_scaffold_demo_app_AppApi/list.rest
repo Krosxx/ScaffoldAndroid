@@ -1,0 +1,12 @@
+GET
+{BASE_URL}/list
+&page=1
+
+
+
+
+%%%
+# GET
+# http://127.0.0.1/list?&page=1
+
+# Error: Failed to connect to /127.0.0.1:80

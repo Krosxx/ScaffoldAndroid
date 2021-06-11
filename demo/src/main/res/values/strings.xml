@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ScaffoldAndroid</string>
+    <string name="loading">Loading...</string>
+    <string name="design_code">Design code</string>
+</resources>

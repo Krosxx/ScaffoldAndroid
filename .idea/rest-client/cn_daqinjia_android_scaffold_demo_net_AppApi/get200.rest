@@ -1,0 +1,19 @@
+GET
+{BASE_URL}/200
+
+
+
+
+%%%
+# Duration: 11 ms
+# GET
+# http://127.0.0.1/200
+
+
+# status 200
+
+@Content-Length: 12
+@Content-Type: text/plain; charset=UTF-8
+@Connection: keep-alive
+
+HELLO WORLD!

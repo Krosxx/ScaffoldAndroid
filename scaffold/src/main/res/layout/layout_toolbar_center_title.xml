@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    tools:background="#03A9F4"
+    tools:layout_height="60dp">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/nav_icon"
+        style="?attr/toolbarNavigationButtonStyle"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/back_arrow"
+        android:visibility="invisible"
+        tools:layout_width="60dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textAppearance="?attr/titleTextStyle"
+        tools:text="@string/app_name" />
+
+    <androidx.appcompat.widget.ActionMenuView
+        android:id="@+id/menuView"
+        style="@style/Theme.AppCompat.Light.DarkActionBar"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="match_parent"
+        tools:layout_width="60dp" />
+</LinearLayout>

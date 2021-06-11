@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScaffoldAndroid</string>
+    <string name="loading">加载中...</string>
+    <string name="design_code">设计规范</string>
+</resources>

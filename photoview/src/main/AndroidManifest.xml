@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.ielse.imagewatcher">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+        <activity
+            android:name=".PhotoViewActivity"
+            android:theme="@style/PhotoViewActivity" />
+    </application>
+</manifest>
