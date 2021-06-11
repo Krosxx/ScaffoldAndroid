@@ -6,13 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
 import cn.vove7.android.scaffold.R
 import cn.vove7.android.scaffold.app.ActivityManager
 import cn.vove7.android.scaffold.app.ActivityStatus
-import java.lang.reflect.ParameterizedType
-import kotlin.reflect.KClass
 
 /**
  * # ScaffoldActivity
@@ -34,7 +31,7 @@ abstract class ScaffoldActivity<VDB : ViewBinding>
     open val showReturnIcon = true
 
     //需要显示Toolbar
-    open val needToolbar = true
+    open val needToolbar = false
 
     override val textSizeChangeable: Boolean
         get() = supportFontSizeChangeable
@@ -55,8 +52,10 @@ abstract class ScaffoldActivity<VDB : ViewBinding>
     companion object {
         //开启适配 DarkMode
         var enableThamable = false
+
         //Android Q DarkMode style 资源
         var globalDarkTheme: Int = 0
+
         //支持字体大小可修改
         var supportFontSizeChangeable = false
     }
@@ -67,9 +66,21 @@ abstract class ScaffoldActivity<VDB : ViewBinding>
             return mode == Configuration.UI_MODE_NIGHT_YES
         }
 
-    private val rootView by lazy {
-        layoutInflater.inflate(R.layout.activity_scaffold, null) as ViewGroup
+
+    private fun buildScaffoldRootView(): ViewGroup? {
+        return if (needToolbar) {
+            (layoutInflater.inflate(R.layout.activity_scaffold, null) as ViewGroup).also { rv ->
+                setCustomToolbar(rv)
+                buildView(rv, layoutInflater)?.also { cv ->
+                    rv.addView(cv)
+                }
+            }
+        } else {
+            buildView(null, layoutInflater) as ViewGroup?
+        }
     }
+
+    private lateinit var rootView: View
 
     private fun checkTheme() {
         if (!enableThamable) {
@@ -83,25 +94,37 @@ abstract class ScaffoldActivity<VDB : ViewBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
-        setCustomToolbar(rootView)
-        buildView(rootView, layoutInflater)?.also {
-            rootView.addView(it)
+        buildScaffoldRootView()?.also {
+            rootView = it
+            super.setContentView(it)
         }
-        super.setContentView(rootView)
-
         onPageCreate()
     }
 
     override fun setContentView(view: View) {
-        rootView.addView(view)
+        if (needToolbar) {
+            (rootView as ViewGroup).addView(view)
+        } else {
+            rootView = view
+            super.setContentView(view)
+        }
     }
 
     override fun setContentView(layoutResID: Int) {
-        layoutInflater.inflate(layoutResID, rootView, true)
+        rootView = layoutInflater.inflate(
+            layoutResID,
+            if (needToolbar) rootView as ViewGroup else null,
+            needToolbar
+        )
+        super.setContentView(rootView)
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        rootView.addView(view, params)
+        if (needToolbar) {
+            (rootView as ViewGroup).addView(view)
+        } else {
+            super.setContentView(view, params)
+        }
     }
 
     private fun setCustomToolbar(rootView: ViewGroup) {
@@ -129,6 +152,7 @@ abstract class ScaffoldActivity<VDB : ViewBinding>
     }
 
     var backToParentPage = true
+
     /**
      * 若指定 parentActivity 则启动
      * 解决在启动某些Activity后，返回无法回到主页

@@ -24,7 +24,7 @@ import com.github.ielse.imagewatcher.PhotoViewActivity
  */
 class IndexActivity : NoBindingActivity() {
     override val layoutRes: Int = 0
-
+    override val needToolbar: Boolean = false
     override val showReturnIcon: Boolean = false
 
     private val excludeActivity = arrayOf(

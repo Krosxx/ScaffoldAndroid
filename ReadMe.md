@@ -1,6 +1,13 @@
 
 
-# 安卓开发脚手架
+# ScaffoldAndroid
+
+
+> 支持 ViewBinding & DataBinding 摆脱 layoutId
+
+```kotlin
+class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>()
+```
 
 ### MVVM
 

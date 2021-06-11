@@ -45,7 +45,7 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, item.title ?: "null", Toast.LENGTH_SHORT).show()
 
         return super.onOptionsItemSelected(item)
     }
