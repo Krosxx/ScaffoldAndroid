@@ -9,6 +9,22 @@
 class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>()
 ```
 
+### 引入
+
+```groovy
+//project
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+//app module
+dependencies {
+    implementation 'com.github.Vove7:ScaffoldAndroid:1.0.1'
+}
+```
+
 ### MVVM
 
 ![]( https://camo.githubusercontent.com/2b3ff9b3a5f99c5480b612aa8f4f678dc696987a/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f342f31352f313661323130313664663963373663353f773d39363026683d37323026663d7765627026733d3135333832 )
