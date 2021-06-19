@@ -2,14 +2,16 @@ package cn.vove7.android.scaffold.ui.base
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Keep
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import cn.vove7.android.scaffold.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 
-
-open class BaseBindAdapter<T>(layoutResId: Int, br: Int) : BaseQuickAdapter<T, BaseBindAdapter.BindViewHolder>(layoutResId) {
+@Keep
+open class BaseBindAdapter<T>(layoutResId: Int, br: Int) :
+    BaseQuickAdapter<T, BaseBindAdapter.BindViewHolder>(layoutResId) {
 
     /**
      * 将getItem()自动绑定到layout.data中
@@ -26,13 +28,15 @@ open class BaseBindAdapter<T>(layoutResId: Int, br: Int) : BaseQuickAdapter<T, B
     }
 
     override fun getItemView(layoutResId: Int, parent: ViewGroup?): View {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(mLayoutInflater, layoutResId, parent, false)
+        val binding =
+            DataBindingUtil.inflate<ViewDataBinding>(mLayoutInflater, layoutResId, parent, false)
                 ?: return super.getItemView(layoutResId, parent)
         return binding.root.apply {
             setTag(R.id.BaseQuickAdapter_databinding_support, binding)
         }
     }
 
+    @Keep
     class BindViewHolder(view: View) : BaseViewHolder(view) {
         val binding: ViewDataBinding
             get() = itemView.getTag(R.id.BaseQuickAdapter_databinding_support) as ViewDataBinding
