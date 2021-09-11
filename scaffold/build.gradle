@@ -1,7 +1,20 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = libGroupId
+                artifactId = 'scaffold'
+                version = libVersion
+            }
+        }
+    }
+}
 android {
     compileSdkVersion 30
 
