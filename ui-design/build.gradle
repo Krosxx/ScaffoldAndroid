@@ -1,24 +1,23 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion build_version.compileSdkVersion
+    compileSdkVersion 30
 
     defaultConfig {
-        minSdkVersion build_version.minSdkVersion
-        targetSdkVersion build_version.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding true
     }
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    implementation libs.kotlin_stdlib
-    implementation libs.appcompat
+
     implementation project(':common')
 }

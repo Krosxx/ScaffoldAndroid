@@ -1,5 +1,6 @@
 package cn.vove7.android.scaffold.demo.activities
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -20,18 +21,15 @@ class MVVMDemoActivity : ScaffoldActivity<ActivityMvvmDemoBinding>() {
     //koin fun viewModel() 注入repo
     private val vm: DemoViewModel by viewModel()
 
+    @SuppressLint("SetTextI18n")
     override fun onObserveLiveData() {
         vm.number.observe(this) {
-            binding.number = it
+            binding.a.text = it.toString()
             vm.updateUserName("Vove-$it")
         }
         vm.username.observe(this) {
-            binding.username = "local name: " + it.value
+            binding.b.text = "local name: " + it.value
         }
-    }
-
-    override fun bindBinding() {
-        binding.number = vm.number.value ?: 0
     }
 
     fun onClick(v: View) {

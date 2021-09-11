@@ -3,9 +3,6 @@ package cn.vove7.android.scaffold.ui.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import cn.vove7.android.scaffold.net.ScaffoldApi
-import kotlinx.coroutines.CoroutineScope
 
 /**
  * # ScaffoldViewModel
@@ -15,10 +12,7 @@ import kotlinx.coroutines.CoroutineScope
  */
 typealias UiData = Map<String, Any?>
 
-open class ScaffoldViewModel : ViewModel(), ScaffoldApi {
-    override val scope: CoroutineScope
-        get() = viewModelScope
-
+open class ScaffoldViewModel : ViewModel() {
     /**
      * 负责传递数据到UI
      */

@@ -1,14 +1,11 @@
 package cn.vove7.android.scaffold.net
 
-import cn.vove7.android.common.ext.ReflectExt.get
 import cn.vove7.android.scaffold.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import kotlin.reflect.KClass
-import kotlin.reflect.full.companionObjectInstance
 
 object RestApi {
 
@@ -33,42 +30,6 @@ object RestApi {
             .addConverterFactory(GsonConverterFactory.create())
             .client(createOkHttpClient(isDebug, connectionTimeout, readTimeout, writeTimeout))
             .build()
-    }
-
-    inline fun <reified T : Any> createKot(): T = createKot(T::class)
-
-    /**
-     * Create api service baseUrl singleton
-     *
-     * Config value in companion impl [RetrofitApiConstants]
-     *
-     * 参数优先级高于 Api 内部定义参数
-     */
-    fun <T : Any> createKot(
-        clz: KClass<T>,
-        connectionTimeout: Int? = null,
-        readTimeout: Int? = null,
-        writeTimeout: Int? = null
-    ): T {
-
-        val companionRef = clz.companionObjectInstance
-            ?: throw IllegalArgumentException("${clz.simpleName} does not have a companion field")
-
-        return if (companionRef is RetrofitApiConstants) {
-            createApiClient(
-                companionRef.baseUrl,
-                connectionTimeout ?: companionRef.connectionTimeoutMillis,
-                readTimeout ?: companionRef.readTimeoutMillis,
-                writeTimeout ?: companionRef.writeTimeoutMillis
-            ).create(clz.java)
-        } else {
-            createApiClient(
-                companionRef["BASE_URL"],
-                connectionTimeout ?: companionRef["CONNECTIONTIMEOUT", 5000],
-                readTimeout ?: companionRef["READTIMEOUT", 5000],
-                writeTimeout ?: companionRef["WRITETIMEOUT", 5000]
-            ).create(clz.java)
-        }
     }
 
     // create okHttpClient singleton

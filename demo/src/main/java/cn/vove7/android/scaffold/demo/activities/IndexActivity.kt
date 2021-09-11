@@ -24,7 +24,6 @@ import com.github.ielse.imagewatcher.PhotoViewActivity
  */
 class IndexActivity : NoBindingActivity() {
     override val layoutRes: Int = 0
-    override val needToolbar: Boolean = false
     override val showReturnIcon: Boolean = false
 
     private val excludeActivity = arrayOf(
@@ -59,10 +58,14 @@ class IndexActivity : NoBindingActivity() {
                         ContextCompat.getDrawable(context, tv.resourceId)
                     )
                 }).apply {
-                    val cls = Class.forName(item.name)
-                    text = cls.simpleName
-                    setOnClickListener {
-                        context.startActivity(Intent(context, cls))
+                    text = try {
+                        val cls = Class.forName(item.name)
+                        setOnClickListener {
+                            context.startActivity(Intent(context, cls))
+                        }
+                        cls.simpleName
+                    } catch (E: Throwable) {
+                        E.message
                     }
                 }
             }

@@ -3,12 +3,16 @@ package cn.vove7.android.scaffold.demo.activities
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import cn.vove7.android.common.ext.gone
+import cn.vove7.android.common.ext.show
 import cn.vove7.android.scaffold.demo.app.AppApi
 import cn.vove7.android.scaffold.demo.data.ResponseData
 import cn.vove7.android.scaffold.demo.databinding.ActivityNetTestBinding
 import cn.vove7.android.scaffold.ext.viewModelOf
 import cn.vove7.android.scaffold.ui.base.ScaffoldActivity
 import cn.vove7.android.scaffold.ui.base.ScaffoldViewModel
+import kotlinx.coroutines.launch
 
 /**
  * # NetTestActivity
@@ -30,19 +34,23 @@ class NetTestActivity : ScaffoldActivity<ActivityNetTestBinding>() {
     override fun onObserveLiveData() {
         vm.uiData.observe(this) {
             if ("loading" in it) {
-                binding.error = false
+                binding.dataView.text = "Loading"
+                binding.dataView.show()
+                binding.reload.gone()
             }
             if ("loading_error" in it) {
-                binding.error = true
+                binding.dataView.gone()
+                binding.reload.show()
             }
         }
 
         vm.resData.observe(this) {
             Log.d("NetTest", it.toString())
             if (it.isSuccess) {
-                binding.data = it.data
+                binding.dataView.text = it.data.toString()
             } else {
-                binding.error = true
+                binding.dataView.gone()
+                binding.reload.show()
             }
         }
     }
@@ -65,17 +73,10 @@ class NetTestViewModel : ScaffoldViewModel() {
 
     fun load() {
         emitUiState("loading")
-        apiCall(AppApi::get200) {
-//            此处非回调，等价于：
-//            if (isSuccess) {
-//
-//            } else {
-//
-//            }
-            onSuccess {
-                resData.value = it
-            }
-            onFailure {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                resData.value = AppApi.get200()
+            }.onFailure {
                 emitUiState("loading_error" to it)
             }
         }

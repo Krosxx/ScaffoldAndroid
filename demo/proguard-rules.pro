@@ -22,10 +22,4 @@
 
 -keepattributes Exceptions,InnerClasses,Signature,LineNumberTable,SourceFile
 
-
--keepclassmembers class * implements androidx.viewbinding.ViewBinding {
-    public static <methods>;
-}
--keepclassmembers class * implements androidx.databinding.ViewDataBinding {*;}
-
 -keep class n.vove7.android.scaffold.demo.** {*;}

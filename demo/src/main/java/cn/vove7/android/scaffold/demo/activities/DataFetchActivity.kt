@@ -1,10 +1,12 @@
 package cn.vove7.android.scaffold.demo.activities
 
 import android.view.View
+import androidx.lifecycle.viewModelScope
 import cn.vove7.android.scaffold.demo.app.AppApi
 import cn.vove7.android.scaffold.demo.databinding.ActivityDataFetchBinding
 import cn.vove7.android.scaffold.ui.base.ScaffoldActivity
 import cn.vove7.android.scaffold.ui.base.ScaffoldViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -29,11 +31,17 @@ class DataFetchActivity : ScaffoldActivity<ActivityDataFetchBinding>() {
     }
 }
 
+val IT = fun(it: Any?): Any? = it
+
 class MStepViewModel : ScaffoldViewModel() {
 
     //通过 reqName 作为请求标识 => uiData(LiveData) => UI
-    fun onFetch() = apiCall({ AppApi.list(0) }) {
-        emitUiState("fetch_data" to this)
+    fun onFetch() = viewModelScope.launch {
+        emitUiState(
+            "fetch_data" to kotlin.runCatching {
+                AppApi.list(0)
+            }.fold(onSuccess = IT, onFailure = { it.message })
+        )
     }
 
 }

@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:onClick="log"
+        android:text="打印日志" />
 
-        <Button
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/log_text"
+            android:typeface="monospace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="log"
-            android:text="打印日志" />
+            android:textSize="10sp" />
 
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/log_text"
-                android:typeface="monospace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="10sp" />
-
-        </ScrollView>
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

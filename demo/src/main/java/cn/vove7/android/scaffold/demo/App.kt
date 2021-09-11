@@ -42,7 +42,7 @@ class App : ScaffoldApp() {
             callstackDepth = 3
         }
         ScaffoldActivity.apply {
-            enableThamable = true
+            enableAutoDarkTheme = true
             globalDarkTheme = R.style.DarkTheme
         }
     }

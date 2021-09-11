@@ -2,13 +2,14 @@ package cn.vove7.android.scaffold.demo.activities
 
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.GridLayoutManager
-import cn.vove7.android.scaffold.demo.BR
 import cn.vove7.android.scaffold.demo.R
 import cn.vove7.android.scaffold.demo.databinding.ActivityImagesBinding
+import cn.vove7.android.scaffold.demo.databinding.ItemImageBinding
 import cn.vove7.android.scaffold.demo.repo.ImagesRepo
-import cn.vove7.android.scaffold.ui.base.BaseBindAdapter
+import cn.vove7.android.scaffold.ui.adapter.SBindAdapter
 import cn.vove7.android.scaffold.ui.base.ScaffoldActivity
 import cn.vove7.android.scaffold.ui.base.ScaffoldViewModel
+import com.bumptech.glide.Glide
 import com.cooltechworks.views.shimmer.ShimmerAdapter
 import com.github.ielse.imagewatcher.PhotoViewActivity
 import com.github.ielse.imagewatcher.start
@@ -26,15 +27,7 @@ class ImagesActivity : ScaffoldActivity<ActivityImagesBinding>() {
     private val vm: ImagesViewModel by viewModel()
 
     private val adapter by lazy {
-        ImagesAdapter().apply {
-            setOnItemClickListener { _, view, position ->
-                PhotoViewActivity.start(
-                    this@ImagesActivity,
-                    view.findViewById(R.id.img),
-                    data, position
-                )
-            }
-        }
+        ImagesAdapter()
     }
 
     override fun onObserveLiveData() {
@@ -43,7 +36,7 @@ class ImagesActivity : ScaffoldActivity<ActivityImagesBinding>() {
                 binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
                 binding.recyclerView.adapter = adapter
             }
-            adapter.setNewData(it)
+            adapter.setData(it)
         }
     }
 
@@ -62,4 +55,11 @@ class ImagesViewModel(imgRepo: ImagesRepo) : ScaffoldViewModel() {
     }
 }
 
-class ImagesAdapter : BaseBindAdapter<String>(R.layout.item_image, BR.imgUrl)
+class ImagesAdapter : SBindAdapter<ItemImageBinding, String>() {
+    override fun onBind(binding: ItemImageBinding, item: String) {
+        Glide.with(binding.img).load(item).into(binding.img)
+        binding.img.setOnClickListener {
+            PhotoViewActivity.start(binding.img.context, binding.img, item)
+        }
+    }
+}
