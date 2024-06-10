@@ -75,7 +75,7 @@ dependencies {
     //https图片处理
     implementation "com.github.bumptech.glide:okhttp3-integration:4.10.0"
 
-    implementation "com.github.Vove7.SmartKey:smartkey-android:6.3.3"
+    implementation 'com.github.Krosxx.SmartKey:smartkey-android:6.3.8'
 
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     api project(':common')
